@@ -1,11 +1,11 @@
 {
-  "name": "iwwa-lambda-realtime-aggregator",
+  "name": "iwwa-lambda-readings-realtime-aggregator",
   "version": "1.0.0",
   "description": "Aggregated readings API",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/innowation/iwwa-lambda-realtime-aggregator.git"
+    "url": "https://github.com/innowation/iwwa-lambda-readings-realtime-aggregator.git"
   },
   "dependencies": {
     "bluebird": "^3.0.5",

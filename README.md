@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/innowatio/iwwa-lambda-realtime-aggregator.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-lambda-realtime-aggregator)
-[![Dependency Status](https://david-dm.org/innowatio/iwwa-lambda-realtime-aggregator.svg)](https://david-dm.org/innowatio/iwwa-lambda-realtime-aggregator)
-[![devDependency Status](https://david-dm.org/innowatio/iwwa-lambda-realtime-aggregator/dev-status.svg)](https://david-dm.org/innowatio/iwwa-lambda-realtime-aggregator#info=devDependencies)
+[![Build Status](https://travis-ci.org/innowatio/iwwa-lambda-readings-realtime-aggregator.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-lambda-readings-realtime-aggregator)
+[![Dependency Status](https://david-dm.org/innowatio/iwwa-lambda-readings-realtime-aggregator.svg)](https://david-dm.org/innowatio/iwwa-lambda-readings-realtime-aggregator)
+[![devDependency Status](https://david-dm.org/innowatio/iwwa-lambda-readings-realtime-aggregator/dev-status.svg)](https://david-dm.org/innowatio/iwwa-lambda-readings-realtime-aggregator#info=devDependencies)
 
-# iwwa-lambda-realtime-aggregator
+# iwwa-lambda-readings-realtime-aggregator
 
 Aggregate readings in real time.
 
