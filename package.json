@@ -1,7 +1,7 @@
 {
   "name": "iwwa-lambda-readings-realtime-aggregator",
   "version": "1.0.0",
-  "description": "Aggregated readings API",
+  "description": "Real-time readings aggregator",
   "main": "src/index.js",
   "repository": {
     "type": "git",
