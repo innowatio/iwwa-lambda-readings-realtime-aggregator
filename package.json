@@ -8,6 +8,7 @@
     "url": "https://github.com/innowation/iwwa-lambda-readings-realtime-aggregator.git"
   },
   "dependencies": {
+    "babel": "^5.8.34",
     "bluebird": "^3.0.5",
     "bunyan": "^1.5.1",
     "dotenv": "^1.2.0",
