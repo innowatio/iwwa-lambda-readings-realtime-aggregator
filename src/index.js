@@ -1,3 +1,4 @@
+import "babel/polyfill";
 import {all} from "bluebird";
 import router from "kinesis-router";
 
