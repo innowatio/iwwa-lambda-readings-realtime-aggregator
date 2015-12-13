@@ -8,13 +8,12 @@ export function findSiteBySensorId (sensorId) {
     return resolve(sensorId)
         .then(sensorId => mongodb.findOne({
             url: config.MONGODB_URL,
-            collectionName: config.SENSORS,
-            query: {_id: sensorId}
-        }))
-        .then(sensor => mongodb.findOne({
-            url: config.MONGODB_URL,
             collectionName: config.SITES,
-            query: {_id: sensor.siteId}
+            query: {
+                sensorIds: {
+                    $in: [sensorId]
+                }
+            }
         }));
 }
 
