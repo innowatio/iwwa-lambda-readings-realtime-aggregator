@@ -27,6 +27,10 @@ function getSensor (measurements) {
     };
 }
 export function updateReadingsRealTimeAggregate (site, element) {
+    if (!site) {
+        log.info("Site not found");
+        return null;
+    }
     log.info({site}, "Found site");
     const params = {
         url: config.MONGODB_URL,
