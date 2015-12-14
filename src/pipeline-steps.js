@@ -10,7 +10,7 @@ export function findSiteBySensorId (sensorId) {
             url: config.MONGODB_URL,
             collectionName: config.SITES,
             query: {
-                sensorIds: {
+                sensorsIds: {
                     $in: [sensorId]
                 }
             }
