@@ -11,6 +11,9 @@ import {
 function pipeline (event) {
     log.info({event}, "Received event");
     const {data: {element}} = event;
+    if (!element) {
+        return null;
+    }
     return all([findSiteBySensorId(element.sensorId), element])
         .spread(updateReadingsRealTimeAggregate);
 }
