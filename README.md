@@ -34,3 +34,9 @@ The following environment variables are needed to configure the function:
 NOTE: since the project uses `lambda-deploy`, in the build environment (Travis)
 we need to define the above variables with their name prefixed by
 `__FUNC_CONFIG__`.
+
+### Run test
+
+In order to run tests locally a MongoDB instance and a `MONGODB_URL` environment
+param are needed.
+Then, just run `npm run test` command.

@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {identity} from "ramda";
 import sinon from "sinon";
 
-import * as pipelineSteps from "../src/pipeline-steps";
+import * as pipelineSteps from "../../src/pipeline-steps";
 
 describe("updateReadingsRealTimeAggregate", () => {
 
