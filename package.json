@@ -39,7 +39,9 @@
     "deploy": "gulp deploy",
     "dev": "npm test -- --watch",
     "lint": "eslint src test",
-    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel/register --recursive"
+    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel/register --recursive",
+    "dev_windows": "npm run test_windows -- --watch",
+    "test_windows": "set NODE_PATH=src&& set NODE_ENV=test&& mocha --compilers js:babel/register --recursive"
   },
   "author": "Team Wattellina <wattellina@mondora.com>",
   "license": "Apache-2.0"
