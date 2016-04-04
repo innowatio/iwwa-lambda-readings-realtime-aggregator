@@ -8,30 +8,28 @@
     "url": "https://github.com/innowation/iwwa-lambda-readings-realtime-aggregator.git"
   },
   "dependencies": {
-    "babel": "^5.8.34",
-    "bluebird": "^3.0.5",
+    "babel": "^5.8.38",
+    "bluebird": "^3.3.4",
     "bunyan": "^1.5.1",
-    "dotenv": "^1.2.0",
+    "dotenv": "^2.0.0",
     "kinesis-router": "^1.2.1",
     "mongodb": "^2.0.49",
-    "ramda": "^0.18.0"
+    "ramda": "^0.20.1"
   },
   "devDependencies": {
-    "babel": "^5.8.34",
-    "babel-core": "^5.8.34",
-    "babel-eslint": "^5.0.0-beta4",
+    "babel": "^5.8.38",
+    "babel-core": "^5.8.38",
+    "babel-eslint": "^5.0.4",
     "babel-plugin-rewire": "^0.1.22",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "codecov": "^1.0.1",
-    "coveralls": "^2.11.4",
-    "eslint": "^1.10.1",
+    "eslint": "^2.6.0",
     "gulp": "^3.9.0",
     "isparta": "^3.5.3",
     "lambda-deploy": "^2.1.0",
     "mocha": "^2.3.4",
-    "sinon": "^1.17.2",
-    "sinon-chai": "^2.8.0"
+    "sinon": "^1.17.2"
   },
   "scripts": {
     "clean": "rimraf coverage",
