@@ -113,7 +113,7 @@ describe("On reading", async () => {
             expect(aggregate).to.deep.equal(null);
         });
 
-        it("return `null` if source is `forcast` in element body", async () => {
+        it("return `null` if source is `forecast` in element body", async () => {
             const event = getEventFromObject(
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "forecast")
             );
@@ -122,6 +122,43 @@ describe("On reading", async () => {
             expect(aggregate).to.deep.equal(null);
         });
 
+        it("electrical reading with source in element body", async () => {
+            const oldUpdateDate = new Date("2016-01-01").toISOString();
+            await aggregates.insert({
+                _id: "siteId",
+                siteId: "siteId",
+                sensors: {
+                    sensorId: {
+                        measurements: {
+                            activeEnergy: "1.08",
+                            reactiveEnergy: "5",
+                            maxPower: "3.111",
+                            anotherEnergy: "1"
+                        },
+                        lastUpdated: oldUpdateDate
+                    }
+                }
+            });
+            const event = getEventFromObject(
+                utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "reading")
+            );
+            await run(handler, event);
+            const aggregate = await aggregates.findOne({_id: "siteId"});
+            expect(aggregate).to.deep.equal({
+                _id: "siteId",
+                siteId: "siteId",
+                sensors: {
+                    sensorId: {
+                        measurements: {
+                            activeEnergy: "8.08",
+                            reactiveEnergy: "85",
+                            maxPower: "3.000",
+                            anotherEnergy: "1"
+                        },
+                        lastUpdated: new Date().toISOString()
+                    }
+                }
+            });
+        });
     });
-
 });

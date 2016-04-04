@@ -51,13 +51,9 @@ describe("updateReadingsRealTimeAggregate", () => {
             },
             modifier: {
                 $set: {
-                    "sensors.sensorId": {
-                        measurements: {
-                            activeEnergy: 100,
-                            reactiveEnergy: 200
-                        },
-                        lastUpdated: "1970-01-01T00:00:00.000Z"
-                    }
+                    "sensors.sensorId.measurements.activeEnergy": 100,
+                    "sensors.sensorId.measurements.reactiveEnergy": 200,
+                    "sensors.sensorId.lastUpdated": "1970-01-01T00:00:00.000Z"
                 }
             }
         });

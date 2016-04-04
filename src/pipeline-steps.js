@@ -1,4 +1,5 @@
 import {resolve} from "bluebird";
+import {merge} from "ramda";
 
 import * as config from "./services/config";
 import log from "./services/logger";
@@ -17,15 +18,16 @@ export function findSiteBySensorId (sensorId) {
         }));
 }
 
-function getSensor (measurements) {
-    return {
-        measurements: measurements.reduce((acc, measurement) => ({
-            ...acc,
-            [measurement.type]: measurement.value
-        }), {}),
-        lastUpdated: new Date().toISOString()
-    };
+function getSetters (measurements, sensorId) {
+    const path = `sensors.${sensorId}`;
+    return merge(
+    measurements.reduce((acc, measurement) => ({
+        ...acc,
+        [`${path}.measurements.${measurement.type}`]: measurement.value
+    }), {}),
+    {[`${path}.lastUpdated`]: new Date().toISOString()});
 }
+
 export function updateReadingsRealTimeAggregate (site, element) {
     if (!site) {
         log.info("Site not found");
@@ -40,10 +42,7 @@ export function updateReadingsRealTimeAggregate (site, element) {
             siteId: site._id
         },
         modifier: {
-            $set: {
-                [`sensors.${element.sensorId}`]: getSensor(element.measurements)
-                // TODO update virtual sensors
-            }
+            $set: getSetters(element.measurements, element.sensorId)
         }
     };
     log.info({params}, "Upserting");
