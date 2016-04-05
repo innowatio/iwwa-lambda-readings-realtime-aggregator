@@ -8,6 +8,8 @@
     "url": "https://github.com/innowation/iwwa-lambda-readings-realtime-aggregator.git"
   },
   "dependencies": {
+    "babel": "^5.8.29",
+    "babel-plugin-rewire": "^0.1.22",
     "bluebird": "^3.3.4",
     "bunyan": "^1.5.1",
     "dotenv": "^2.0.0",
@@ -18,17 +20,17 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^5.8.29",
-    "babel-eslint": "^6.0.2",
-    "babel-plugin-rewire": "^0.1.22",
-    "babel-register": "^6.7.2",
+    "babel-eslint": "^4.1.4",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "codecov": "^1.0.1",
-    "eslint": "^2.7.0",
+    "escope": "3.3.0",
+    "eslint": "^1.9.0",
     "gulp": "^3.9.0",
-    "isparta": "^4.0.0",
+    "gulp-eslint": "^1.0.0",
+    "isparta": "^3.5.3",
     "lambda-deploy": "^2.1.0",
-    "mocha": "^2.3.4",
+    "mocha": "^2.3.3",
     "sinon": "^1.17.2"
   },
   "scripts": {
@@ -38,7 +40,7 @@
     "deploy": "gulp deploy",
     "dev": "npm test -- --watch",
     "lint": "eslint src test",
-    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel-core/register --recursive"
+    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel/register --recursive"
   },
   "author": "Team Wattellina <wattellina@mondora.com>",
   "license": "Apache-2.0"
