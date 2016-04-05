@@ -1,10 +1,10 @@
-import "babel/polyfill";
+import "babel-core/polyfill";
 import {all} from "bluebird";
 import {contains} from "ramda";
 import router from "kinesis-router";
 
 import log from "./services/logger";
-import{ALLOWED_SOURCE} from "./services/config";
+import {ALLOWED_SOURCE} from "./services/config";
 import {
     findSiteBySensorId,
     updateReadingsRealTimeAggregate

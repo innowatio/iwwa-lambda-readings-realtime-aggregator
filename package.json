@@ -8,7 +8,6 @@
     "url": "https://github.com/innowation/iwwa-lambda-readings-realtime-aggregator.git"
   },
   "dependencies": {
-    "babel": "^5.8.38",
     "bluebird": "^3.3.4",
     "bunyan": "^1.5.1",
     "dotenv": "^2.0.0",
@@ -17,16 +16,16 @@
     "ramda": "^0.20.1"
   },
   "devDependencies": {
-    "babel": "^5.8.38",
-    "babel-core": "^5.8.38",
-    "babel-eslint": "^5.0.4",
+    "babel": "^6.5.2",
+    "babel-core": "^5.8.29",
+    "babel-eslint": "^6.0.2",
     "babel-plugin-rewire": "^0.1.22",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "codecov": "^1.0.1",
-    "eslint": "^2.6.0",
+    "eslint": "^2.7.0",
     "gulp": "^3.9.0",
-    "isparta": "^3.5.3",
+    "isparta": "^4.0.0",
     "lambda-deploy": "^2.1.0",
     "mocha": "^2.3.4",
     "sinon": "^1.17.2"
@@ -38,7 +37,7 @@
     "deploy": "gulp deploy",
     "dev": "npm test -- --watch",
     "lint": "eslint src test",
-    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel/register --recursive"
+    "test": "NODE_PATH=src NODE_ENV=test mocha --compilers js:babel-core/register --recursive"
   },
   "author": "Team Wattellina <wattellina@mondora.com>",
   "license": "Apache-2.0"
