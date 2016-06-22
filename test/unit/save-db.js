@@ -9,6 +9,11 @@ import {saveReadingRealtime} from "steps/save-db";
 
 describe("saveReadingRealtime", () => {
 
+    before(async () => {
+        const db = await getMongoClient();
+        await db.createCollection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
+    });
+
     after(async () => {
         const db = await getMongoClient();
         await db.dropCollection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);

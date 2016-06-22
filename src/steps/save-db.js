@@ -36,7 +36,14 @@ export async function saveReadingRealtime (realtime) {
     if (savedRealtime.measurementTime < realtime.measurementTime) {
         await upsertRealtime(
             realtime._id,
-            realtime
+            {
+                day: realtime.day,
+                measurementType: realtime.measurementType,
+                measurementValue: realtime.measurementValue,
+                measurementTime: realtime.measurementTime,
+                unitOfMeasurement: realtime.unitOfMeasurement,
+                source: realtime.source
+            }
         );
     }
 }

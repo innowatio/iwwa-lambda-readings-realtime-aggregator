@@ -20,16 +20,21 @@ describe("On reading", async () => {
     var aggregates;
     var db;
 
-    beforeEach(async () => {
+    before(async () => {
         db = await getMongoClient();
-        aggregates = db.collection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
-        context.succeed.reset();
-        context.fail.reset();
+        await db.createCollection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
     });
 
     after(async () => {
         db = await getMongoClient();
         await db.dropCollection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
+    });
+
+    beforeEach(async () => {
+        db = await getMongoClient();
+        aggregates = db.collection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
+        context.succeed.reset();
+        context.fail.reset();
     });
 
     it("creates an aggregate (reading real-time) element if it doesn't exist [CASE 0: source in measurements]", async () => {
