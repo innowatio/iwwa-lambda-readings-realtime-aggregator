@@ -1,51 +1,53 @@
 import chai, {expect} from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
+import sinon from "sinon";
 
 chai.use(chaiAsPromised);
 
 import {handler} from "index";
-import * as mongodb from "services/mongodb";
-import {READINGS_REAL_TIME_AGGREGATES, MONGODB_URL, SITES} from "services/config";
+import {READINGS_REAL_TIME_AGGREGATES_COLLECTION} from "config";
 import * as utils from "../utils";
-import {getEventFromObject, run} from "../mock";
+import {getEventFromObject} from "../mock";
+import {getMongoClient} from "services/mongodb";
 
 describe("On reading", async () => {
 
+    const context = {
+        succeed: sinon.spy(),
+        fail: sinon.spy()
+    };
+
     var aggregates;
+    var db;
 
     beforeEach(async () => {
-        const connect = mongodb.__get__("connect");
-        const db = await connect(MONGODB_URL);
-        const sites = db.collection(SITES);
-        aggregates = db.collection(READINGS_REAL_TIME_AGGREGATES);
-        sites.update({}, {_id: "siteId", sensorsIds: ["sensorId"]}, {upsert: true});
-        await aggregates.remove({});
+        db = await getMongoClient();
+        aggregates = db.collection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
+        context.succeed.reset();
+        context.fail.reset();
     });
 
     after(async () => {
-        const connect = mongodb.__get__("connect");
-        const db = await connect(MONGODB_URL);
-        await db.dropCollection(SITES);
-        await db.dropCollection(READINGS_REAL_TIME_AGGREGATES);
+        db = await getMongoClient();
+        await db.dropCollection(READINGS_REAL_TIME_AGGREGATES_COLLECTION);
     });
 
-    it("creates an aggregate (reading real-time) element if it doesn't exist if event is with source in measurements", async () => {
+    it("creates an aggregate (reading real-time) element if it doesn't exist [CASE 0: source in measurements]", async () => {
         const event = getEventFromObject(
             utils.getSensorWithSourceInMeasurements("2015-01-01T00:02:00.000Z", "reading")
         );
-        await run(handler, event);
+        await handler(event, context);
         const count = await aggregates.count({});
-        expect(count).to.equal(1);
+        expect(count).to.equal(3);
     });
 
-    it("creates an aggregate (reading real-time) element if it doesn't exist if event is with source in element body", async () => {
+    it("creates an aggregate (reading real-time) element if it doesn't exist [CASE 0: source in element body]", async () => {
         const event = getEventFromObject(
             utils.getSensorWithSourceInElement("2015-01-01T00:02:00.000Z", "reading")
         );
-        await run(handler, event);
+        await handler(event, context);
         const count = await aggregates.count({});
-        expect(count).to.equal(1);
+        expect(count).to.equal(3);
     });
 
     describe("correctly builds the aggregate:", () => {
@@ -64,21 +66,16 @@ describe("On reading", async () => {
             const event = getEventFromObject(
                 utils.getSensorWithSourceInMeasurements("2015-01-01T00:00:30.000Z", "reading")
             );
-            await run(handler, event);
-            const aggregate = await aggregates.findOne({_id: "siteId"});
+            await handler(event, context);
+            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "siteId",
-                siteId: "siteId",
-                sensors: {
-                    sensorId: {
-                        measurements: {
-                            activeEnergy: "0.808",
-                            reactiveEnergy: "-0.085",
-                            maxPower: "0.000"
-                        },
-                        lastUpdated: new Date().toISOString()
-                    }
-                }
+                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                day: "2015-01-01",
+                measurementType: "activeEnergy",
+                measurementValue: "0.808",
+                measurementTime: 1420070520000,
+                unitOfMeasurement: "kWh",
+                source: "reading"
             });
         });
 
@@ -86,30 +83,25 @@ describe("On reading", async () => {
             const event = getEventFromObject(
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "reading")
             );
-            await run(handler, event);
-            const aggregate = await aggregates.findOne({_id: "siteId"});
+            await handler(event, context);
+            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "siteId",
-                siteId: "siteId",
-                sensors: {
-                    sensorId: {
-                        measurements: {
-                            activeEnergy: "8.08",
-                            reactiveEnergy: "85",
-                            maxPower: "3.000"
-                        },
-                        lastUpdated: new Date().toISOString()
-                    }
-                }
+                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                day: "2015-01-01",
+                measurementType: "activeEnergy",
+                measurementValue: "0.808",
+                measurementTime: 1420070520000,
+                unitOfMeasurement: "kWh",
+                source: "reading"
             });
         });
 
-        it("return `null` if source is `forcast` in measurements", async () => {
+        it("return `null` if source is `forecast` in measurements", async () => {
             const event = getEventFromObject(
                 utils.getSensorWithSourceInMeasurements("2015-01-01T00:00:30.000Z", "forecast")
             );
-            await run(handler, event);
-            const aggregate = await aggregates.findOne({_id: "siteId"});
+            await handler(event, context);
+            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-forecast-activeEnergy"});
             expect(aggregate).to.deep.equal(null);
         });
 
@@ -117,47 +109,25 @@ describe("On reading", async () => {
             const event = getEventFromObject(
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "forecast")
             );
-            await run(handler, event);
-            const aggregate = await aggregates.findOne({_id: "siteId"});
+            await handler(event, context);
+            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-forecast-activeEnergy"});
             expect(aggregate).to.deep.equal(null);
         });
 
         it("electrical reading with source in element body", async () => {
-            const oldUpdateDate = new Date("2016-01-01").toISOString();
-            await aggregates.insert({
-                _id: "siteId",
-                siteId: "siteId",
-                sensors: {
-                    sensorId: {
-                        measurements: {
-                            activeEnergy: "1.08",
-                            reactiveEnergy: "5",
-                            maxPower: "3.111",
-                            anotherEnergy: "1"
-                        },
-                        lastUpdated: oldUpdateDate
-                    }
-                }
-            });
             const event = getEventFromObject(
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "reading")
             );
-            await run(handler, event);
-            const aggregate = await aggregates.findOne({_id: "siteId"});
+            await handler(event, context);
+            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "siteId",
-                siteId: "siteId",
-                sensors: {
-                    sensorId: {
-                        measurements: {
-                            activeEnergy: "8.08",
-                            reactiveEnergy: "85",
-                            maxPower: "3.000",
-                            anotherEnergy: "1"
-                        },
-                        lastUpdated: new Date().toISOString()
-                    }
-                }
+                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                day: "2015-01-01",
+                measurementType: "activeEnergy",
+                measurementValue: "0.808",
+                measurementTime: 1420070520000,
+                unitOfMeasurement: "kWh",
+                source: "reading"
             });
         });
     });

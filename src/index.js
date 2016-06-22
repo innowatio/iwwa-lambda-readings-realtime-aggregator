@@ -1,24 +1,7 @@
-import "babel-core/polyfill";
-import {all} from "bluebird";
-import {contains} from "ramda";
+import "babel-polyfill";
 import router from "kinesis-router";
 
-import log from "./services/logger";
-import {ALLOWED_SOURCE} from "./services/config";
-import {
-    findSiteBySensorId,
-    updateReadingsRealTimeAggregate
-} from "./pipeline-steps";
-
-function pipeline (event) {
-    log.info({event}, "Received event");
-    const {data: {element}} = event;
-    if (!!element && contains(ALLOWED_SOURCE, [element.source, element.measurements[0].source])) {
-        return all([findSiteBySensorId(element.sensorId), element])
-            .spread(updateReadingsRealTimeAggregate);
-    }
-    return null;
-}
+import {pipeline} from "pipeline";
 
 export const handler = router()
     .on("element inserted in collection readings", pipeline);

@@ -1,18 +1,15 @@
 import {MongoClient} from "mongodb";
-import {memoize} from "ramda";
 
-const connect = memoize(url => MongoClient.connect(url));
+import {
+    MONGODB_URL
+} from "../config";
 
-export function upsert ({url, collectionName, query, modifier}) {
-    return connect(url)
-        .then(db => db.collection(collectionName).update(
-            query, modifier, {upsert: true}
-        ));
+var mongoClientInstance;
+
+export async function getMongoClient () {
+    if (!mongoClientInstance) {
+        mongoClientInstance = await MongoClient.connect(MONGODB_URL);
+    }
+    return mongoClientInstance;
 }
 
-export function findOne ({url, collectionName, query}) {
-    return connect(url)
-        .then(db => db.collection(collectionName).findOne(
-            query
-        ));
-}
