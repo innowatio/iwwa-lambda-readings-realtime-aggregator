@@ -24,7 +24,7 @@ export async function pipeline (event) {
     }
 
     const mappedReadings = splitMeasurements(measurementsEvent);
-    log.info(mappedReadings, "realtime");
+    log.info({mappedReadings}, "realtime");
 
     await map(mappedReadings, async (reading) => {
         await saveReadingRealtime(reading);
