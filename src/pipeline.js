@@ -16,8 +16,7 @@ export async function pipeline (event) {
      * move on without failing, as failures can block the kinesis stream.
      */
     const measurementsEvent = event.data.element;
-    if (!event.data.id
-        || !measurementsEvent
+    if (!measurementsEvent
         || !measurementsEvent.sensorId
         || !measurementsEvent.measurements
         || !contains(ALLOWED_SOURCE, [measurementsEvent.source, measurementsEvent.measurements[0].source])) {
