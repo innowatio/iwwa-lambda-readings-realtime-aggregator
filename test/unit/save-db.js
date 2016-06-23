@@ -27,8 +27,8 @@ describe("saveReadingRealtime", () => {
             measurementType: "activeEnergy",
             measurementValue: "0.808",
             measurementTime: 1420070400000,
-            unitOfMeasurement: "kWh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kWh"
         };
 
         const realtimeReactive = {
@@ -37,8 +37,8 @@ describe("saveReadingRealtime", () => {
             measurementType: "reactiveEnergy",
             measurementValue: "0.808",
             measurementTime: 1420070300000,
-            unitOfMeasurement: "kWh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kWh"
         };
 
         await saveReadingRealtime(realtime);
@@ -67,8 +67,8 @@ describe("saveReadingRealtime", () => {
             measurementType: "activeEnergy",
             measurementValue: "0.808",
             measurementTime: 1420070300000,
-            unitOfMeasurement: "kWh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kWh"
         };
 
         await saveReadingRealtime(realtime);
@@ -95,8 +95,8 @@ describe("saveReadingRealtime", () => {
             measurementType: "activeEnergy",
             measurementValue: "0.808",
             measurementTime: 1420070500000,
-            unitOfMeasurement: "kWh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kWh"
         };
 
         await saveReadingRealtime(realtime);

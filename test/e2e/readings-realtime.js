@@ -79,8 +79,8 @@ describe("On reading", async () => {
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",
                 measurementTime: 1420070520000,
-                unitOfMeasurement: "kWh",
-                source: "reading"
+                sensorId: "sensorId",
+                unitOfMeasurement: "kWh"
             });
         });
 
@@ -96,8 +96,8 @@ describe("On reading", async () => {
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",
                 measurementTime: 1420070520000,
-                unitOfMeasurement: "kWh",
-                source: "reading"
+                sensorId: "sensorId",
+                unitOfMeasurement: "kWh"
             });
         });
 
@@ -131,8 +131,8 @@ describe("On reading", async () => {
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",
                 measurementTime: 1420070520000,
-                unitOfMeasurement: "kWh",
-                source: "reading"
+                sensorId: "sensorId",
+                unitOfMeasurement: "kWh"
             });
         });
     });

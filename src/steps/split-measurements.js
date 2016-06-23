@@ -2,7 +2,6 @@ import moment from "moment";
 
 export function splitMeasurements (measurementsEvent) {
     const sensorId = measurementsEvent.sensorId;
-    const source = measurementsEvent.source ? measurementsEvent.source : measurementsEvent.measurements[0].source;
     const measurementTime = moment.utc(measurementsEvent.date);
     const measurementDay = measurementTime.format("YYYY-MM-DD");
 
@@ -13,8 +12,8 @@ export function splitMeasurements (measurementsEvent) {
             measurementType: measurement.type,
             measurementValue: measurement.value,
             measurementTime: measurementTime.valueOf(),
-            unitOfMeasurement: measurement.unitOfMeasurement,
-            source: source
+            sensorId: sensorId,
+            unitOfMeasurement: measurement.unitOfMeasurement
         };
     });
     return mapped;

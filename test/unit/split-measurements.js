@@ -56,24 +56,24 @@ describe("splitMeasurements", () => {
             measurementType: "activeEnergy",
             measurementValue: "8.08",
             measurementTime: 0,
-            unitOfMeasurement: "kWh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kWh"
         }, {
             _id: "sensorId-1970-01-01-reading-reactiveEnergy",
             day: "1970-01-01",
             measurementType: "reactiveEnergy",
             measurementValue: "85",
             measurementTime: 0,
-            unitOfMeasurement: "kVArh",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "kVArh"
         }, {
             _id: "sensorId-1970-01-01-reading-maxPower",
             day: "1970-01-01",
             measurementType: "maxPower",
             measurementValue: "3.000",
             measurementTime: 0,
-            unitOfMeasurement: "VAr",
-            source: "reading"
+            sensorId: "sensorId",
+            unitOfMeasurement: "VAr"
         }]);
     });
 });

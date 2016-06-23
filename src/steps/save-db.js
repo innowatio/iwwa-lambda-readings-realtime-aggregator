@@ -41,8 +41,8 @@ export async function saveReadingRealtime (realtime) {
                 measurementType: realtime.measurementType,
                 measurementValue: realtime.measurementValue,
                 measurementTime: realtime.measurementTime,
-                unitOfMeasurement: realtime.unitOfMeasurement,
-                source: realtime.source
+                sensorId: realtime.sensorId,
+                unitOfMeasurement: realtime.unitOfMeasurement
             }
         );
     }
