@@ -72,9 +72,9 @@ describe("On reading", async () => {
                 utils.getSensorWithSourceInMeasurements("2015-01-01T00:00:30.000Z", "reading")
             );
             await handler(event, context);
-            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
+            const aggregate = await aggregates.findOne({_id: "sensorId-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                _id: "sensorId-reading-activeEnergy",
                 day: "2015-01-01",
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",
@@ -89,9 +89,9 @@ describe("On reading", async () => {
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "reading")
             );
             await handler(event, context);
-            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
+            const aggregate = await aggregates.findOne({_id: "sensorId-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                _id: "sensorId-reading-activeEnergy",
                 day: "2015-01-01",
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",
@@ -106,7 +106,7 @@ describe("On reading", async () => {
                 utils.getSensorWithSourceInMeasurements("2015-01-01T00:00:30.000Z", "forecast")
             );
             await handler(event, context);
-            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-forecast-activeEnergy"});
+            const aggregate = await aggregates.findOne({_id: "sensorId-forecast-activeEnergy"});
             expect(aggregate).to.deep.equal(null);
         });
 
@@ -115,7 +115,7 @@ describe("On reading", async () => {
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "forecast")
             );
             await handler(event, context);
-            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-forecast-activeEnergy"});
+            const aggregate = await aggregates.findOne({_id: "sensorId-forecast-activeEnergy"});
             expect(aggregate).to.deep.equal(null);
         });
 
@@ -124,9 +124,9 @@ describe("On reading", async () => {
                 utils.getSensorWithSourceInElement("2015-01-01T00:00:30.000Z", "reading")
             );
             await handler(event, context);
-            const aggregate = await aggregates.findOne({_id: "sensorId-2015-01-01-reading-activeEnergy"});
+            const aggregate = await aggregates.findOne({_id: "sensorId-reading-activeEnergy"});
             expect(aggregate).to.deep.equal({
-                _id: "sensorId-2015-01-01-reading-activeEnergy",
+                _id: "sensorId-reading-activeEnergy",
                 day: "2015-01-01",
                 measurementType: "activeEnergy",
                 measurementValue: "0.808",

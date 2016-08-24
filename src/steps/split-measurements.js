@@ -7,7 +7,7 @@ export function splitMeasurements (measurementsEvent) {
 
     const mapped = measurementsEvent.measurements.map(measurement => {
         return {
-            _id: `${sensorId}-${measurementDay}-reading-${measurement.type}`,
+            _id: `${sensorId}-reading-${measurement.type}`,
             day: measurementDay,
             measurementType: measurement.type,
             measurementValue: measurement.value,

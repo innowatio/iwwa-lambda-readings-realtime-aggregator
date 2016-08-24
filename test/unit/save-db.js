@@ -22,7 +22,7 @@ describe("saveReadingRealtime", () => {
     it("insert measurements", async () => {
 
         const realtime = {
-            _id: "sensorId-2015-01-01-reading-activeEnergy",
+            _id: "sensorId-reading-activeEnergy",
             day: "2015-01-01",
             measurementType: "activeEnergy",
             measurementValue: "0.808",
@@ -32,7 +32,7 @@ describe("saveReadingRealtime", () => {
         };
 
         const realtimeReactive = {
-            _id: "sensorId-2015-01-01-reading-reactiveEnergy",
+            _id: "sensorId-reading-reactiveEnergy",
             day: "2015-01-01",
             measurementType: "reactiveEnergy",
             measurementValue: "0.808",
@@ -62,7 +62,7 @@ describe("saveReadingRealtime", () => {
     it("skip measurement", async () => {
 
         const realtime = {
-            _id: "sensorId-2015-01-01-reading-activeEnergy",
+            _id: "sensorId-reading-activeEnergy",
             day: "2015-01-01",
             measurementType: "activeEnergy",
             measurementValue: "0.808",
@@ -90,7 +90,7 @@ describe("saveReadingRealtime", () => {
     it("update measurement", async () => {
 
         const realtime = {
-            _id: "sensorId-2015-01-01-reading-activeEnergy",
+            _id: "sensorId-reading-activeEnergy",
             day: "2015-01-01",
             measurementType: "activeEnergy",
             measurementValue: "0.808",

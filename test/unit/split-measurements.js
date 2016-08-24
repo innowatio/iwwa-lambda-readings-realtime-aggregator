@@ -51,7 +51,7 @@ describe("splitMeasurements", () => {
         const readings = splitMeasurements(kinesisEvent.data.element);
 
         expect(readings).to.deep.equal([{
-            _id: "sensorId-1970-01-01-reading-activeEnergy",
+            _id: "sensorId-reading-activeEnergy",
             day: "1970-01-01",
             measurementType: "activeEnergy",
             measurementValue: "8.08",
@@ -59,7 +59,7 @@ describe("splitMeasurements", () => {
             sensorId: "sensorId",
             unitOfMeasurement: "kWh"
         }, {
-            _id: "sensorId-1970-01-01-reading-reactiveEnergy",
+            _id: "sensorId-reading-reactiveEnergy",
             day: "1970-01-01",
             measurementType: "reactiveEnergy",
             measurementValue: "85",
@@ -67,7 +67,7 @@ describe("splitMeasurements", () => {
             sensorId: "sensorId",
             unitOfMeasurement: "kVArh"
         }, {
-            _id: "sensorId-1970-01-01-reading-maxPower",
+            _id: "sensorId-reading-maxPower",
             day: "1970-01-01",
             measurementType: "maxPower",
             measurementValue: "3.000",
