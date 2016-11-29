@@ -1,5 +1,5 @@
 import {map} from "bluebird";
-import {contains} from "ramda";
+import {contains, isEmpty} from "ramda";
 
 import log from "./services/logger";
 import {ALLOWED_SOURCE} from "config";
@@ -19,6 +19,7 @@ export async function pipeline (event) {
     if (!measurementsEvent
         || !measurementsEvent.sensorId
         || !measurementsEvent.measurements
+        || isEmpty(measurementsEvent.measurements)
         || !contains(ALLOWED_SOURCE, [measurementsEvent.source, measurementsEvent.measurements[0].source])) {
         return null;
     }
